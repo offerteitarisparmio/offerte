@@ -5,15 +5,26 @@
     <title>In reindirizzamento...</title>
     <script>
         window.onload = function() {
-            // Qui inserisci il tuo link affiliato Amazon (creato con MobileGetlink)
-            var amazonLink = "https://amzn.to/4duo1Kc";
+            // Sostituisci questo con il tuo vero link affiliato Amazon completo
+            var webLink = "https://amzn.to/4duo1Kc";
             
-            // Forza l'apertura immediata dentro l'app Amazon
-            window.location.href = amazonLink;
+            // Estraiamo la parte finale del link corto amzn.to (es. se è https://amzn.to/3Xyz123 prendiamo 3Xyz123)
+            var amznId = webLink.split('/').pop();
+            
+            // Questo è l'URL Scheme ufficiale che dice allo smartphone di aprire l'app di Amazon
+            var appLink = "com.amazon.mobile.shopping://www.amazon.it/dp/" + amznId;
+
+            // 1. Proviamo a sparare subito l'apertura tramite l'applicazione ufficiale
+            window.location.href = appLink;
+
+            // 2. Se l'app non si apre entro mezzo secondo, usa il link web normale come paracadute
+            setTimeout(function() {
+                window.location.href = webLink;
+            }, 500);
         };
     </script>
 </head>
 <body>
-    <p>Reindirizzamento all'offerta in corso...</p>
+    <p>Apertura dell'app Amazon in corso...</p>
 </body>
 </html>
