@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apri l'offerta nell'App</title>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.amazon.it/dp/">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #003399;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ff9900;
+            color: #111;
+            text-decoration: none;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+    
+    <script>
+        function vaiAllApp() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            if (/android/i.test(userAgent)) {
+                window.location.href = "https://amzn.to/4tVfhmP";
+                setTimeout(function() { window.location.replace("https://amzn.to/4tVfhmP"); }, 1500);
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "https://amzn.to/4tVfhmP";
+                setTimeout(function() { window.location.replace("https://amzn.to/4tVfhmP"); }, 1500);
+            } else {
+                window.location.replace("https://amzn.to/4tVfhmP");
+            }
+        }
+        window.onload = vaiAllApp;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Apertura Offerta...</h2>
+        <div class="loader"></div>
+        <p>Stiamo aprendo l'offerta direttamente nell'applicazione di Amazon.</p>
+        <p>Se il telefono non si apre automaticamente, clicca sul pulsante arancione qui sotto:</p>
+        <a href="https://amzn.to/4tVfhmP" onclick="vaiAllApp();" class="btn">VAI ALL'OFFERTA</a>
+    </div>
+</body>
+</html>
