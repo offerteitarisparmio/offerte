@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In reindirizzamento...</title>
+    <script>
+        window.onload = function() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Tenta di forzare l'apertura dell'applicazione ufficiale Amazon
+            if (/android/i.test(userAgent)) {
+                window.location.href = "https://amzn.to/4tVfhmP";
+                setTimeout(function() {
+                    window.location.replace("https://amzn.to/4tVfhmP");
+                }, 1500);
+            } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "https://amzn.to/4tVfhmP";
+                setTimeout(function() {
+                    window.location.replace("https://amzn.to/4tVfhmP");
+                }, 1500);
+            } else {
+                // Desktop o browser tradizionali
+                window.location.replace("https://amzn.to/4tVfhmP");
+            }
+        };
+    </script>
+</head>
+<body>
+    <p style="font-family: sans-serif; text-align: center; margin-top: 50px; font-size: 18px;">
+        Apertura dell'offerta in corso...
+    </p>
+    <p style="font-family: sans-serif; text-align: center;">
+        <a href="https://amzn.to/4tVfhmP" style="color: #003399; text-decoration: none; font-weight: bold;">
+            Clicca qui se l'applicazione non si apre automaticamente
+        </a>
+    </p>
+</body>
+</html>
