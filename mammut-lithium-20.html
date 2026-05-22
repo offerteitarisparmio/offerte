@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>In reindirizzamento...</title>
+    <script>
+        window.onload = function() {
+            var webLink = "https://amzn.to/42OB3h2";
+            var amznId = "42OB3h2";
+            var appLink = "com.amazon.mobile.shopping://www.amazon.it/dp/" + amznId;
+
+            window.location.href = appLink;
+
+            setTimeout(function() {
+                window.location.href = webLink;
+            }, 500);
+        };
+    </script>
+</head>
+<body>
+    <p>Apertura dell'app Amazon in corso...</p>
+</body>
+</html>
