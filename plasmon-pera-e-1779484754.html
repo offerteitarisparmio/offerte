@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apri offerta Amazon</title>
+
+<meta property="og:title" content="Apri l'offerta">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.amazon.it/dp/B01HO0VIRC?psc=1&linkCode=sl2&tag=offerteita07-21&linkId=be8c43a159b03c6b6299b0d3218550c0&ref_=as_li_ss_tl">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    padding:30px;
+    text-align:center;
+}
+
+.box {
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    max-width:450px;
+    margin:auto;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+button {
+    background:#ff9900;
+    border:none;
+    padding:15px 25px;
+    font-size:18px;
+    font-weight:bold;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Apri l'offerta Amazon</h2>
+
+<p>Stiamo aprendo l'offerta.</p>
+
+<button onclick="openAmazon()">
+Apri nell'app Amazon
+</button>
+
+<p style="font-size:12px;margin-top:20px;">
+Se non si apre automaticamente, premi il pulsante.
+</p>
+
+</div>
+
+<script>
+
+function openAmazon() {
+
+var ua=navigator.userAgent||"";
+
+if(/android/i.test(ua)){
+window.location=
+"intent://www.amazon.it/dp/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+
+setTimeout(function(){
+window.location="https://www.amazon.it/dp/B01HO0VIRC?psc=1&linkCode=sl2&tag=offerteita07-21&linkId=be8c43a159b03c6b6299b0d3218550c0&ref_=as_li_ss_tl";
+},1500);
+
+return;
+}
+
+if(/iPhone|iPad|iPod/i.test(ua)){
+window.location=
+"amazon://products/";
+
+setTimeout(function(){
+window.location="https://www.amazon.it/dp/B01HO0VIRC?psc=1&linkCode=sl2&tag=offerteita07-21&linkId=be8c43a159b03c6b6299b0d3218550c0&ref_=as_li_ss_tl";
+},1500);
+
+return;
+}
+
+window.location="https://www.amazon.it/dp/B01HO0VIRC?psc=1&linkCode=sl2&tag=offerteita07-21&linkId=be8c43a159b03c6b6299b0d3218550c0&ref_=as_li_ss_tl";
+
+}
+
+if(
+!navigator.userAgent.includes("FBAN")
+&&
+!navigator.userAgent.includes("FBAV")
+){
+setTimeout(openAmazon,800);
+}
+
+</script>
+
+</body>
+</html>
