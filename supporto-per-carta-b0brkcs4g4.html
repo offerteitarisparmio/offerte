@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apri offerta Amazon</title>
+
+<meta property="og:title" content="Apri l'offerta">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://offerteitarisparmio.github.io/offerte/supporto-per-carta-b0brkcs4g4.html">
+
+<style>
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    background:#f4f6f9;
+    padding:30px 15px;
+    text-align:center;
+}
+.box {
+    background:white;
+    padding:30px 20px;
+    border-radius:16px;
+    max-width:400px;
+    margin:40px auto;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+h2 {
+    color: #111;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.btn {
+    display: inline-block;
+    background:#ff9900;
+    border:none;
+    color: #111;
+    padding: 16px 30px;
+    font-size:18px;
+    font-weight:bold;
+    border-radius:10px;
+    text-decoration: none;
+    cursor:pointer;
+    margin-top:20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>Offerta Pronta!</h2>
+<p>Per visualizzare il prezzo riservato ed evitare rallentamenti, apri l'offerta direttamente nell'app ufficiale.</p>
+
+<a href="https://www.amazon.it/dp/B0BRKCS4G4" onclick="openAmazon(event)" class="btn">
+🛒 APRI IN APPLICAZIONE
+</a>
+
+<p style="font-size:12px; color:#666; margin-top:25px;">
+Premi il pulsante per attivare lo sconto sul tuo account Amazon.
+</p>
+</div>
+
+<script>
+function openAmazon(e) {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const webUrl = "https://www.amazon.it/dp/B0BRKCS4G4";
+    const androidUrl = "intent://www.amazon.it/dp/B0BRKCS4G4/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+    const iosUrl = "com.amazon.mobile.shopping://www.amazon.it/dp/B0BRKCS4G4";
+
+    if (/android/i.test(userAgent)) {
+        e.preventDefault();
+        window.location.href = androidUrl;
+        setTimeout(function () { window.location.href = webUrl; }, 1500);
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        e.preventDefault();
+        window.location.href = iosUrl;
+        setTimeout(function () { window.location.href = webUrl; }, 1500);
+    }
+}
+
+window.onload = function() {
+    if (!navigator.userAgent.includes("FBAN") && !navigator.userAgent.includes("FBAV")) {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android/i.test(userAgent)) {
+            window.location.href = "intent://www.amazon.it/dp/B0BRKCS4G4/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+        } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            window.location.href = "com.amazon.mobile.shopping://www.amazon.it/dp/B0BRKCS4G4";
+        } else {
+            window.location.href = "https://www.amazon.it/dp/B0BRKCS4G4";
+        }
+    }
+}
+</script>
+
+</body>
+</html>
