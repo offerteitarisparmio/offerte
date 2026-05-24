@@ -58,7 +58,7 @@ h2 {
 <h2>Offerta Pronta!</h2>
 <p>Per visualizzare il prezzo riservato ed evitare rallentamenti, apri l'offerta direttamente nell'app ufficiale.</p>
 
-<a href="https://www.amazon.it/dp/B077KBQ341?&linkCode=sl2&tag=offerteita07-21&linkId=51cda0486e6c653259239bd023f99e67&ref_=as_li_ss_tl" onclick="openAmazon(event)" class="btn">
+<a href="https://www.amazon.it/dp/B077KBQ341?tag=offerteita07-21" onclick="openAmazon(event)" class="btn">
 🛒 APRI IN APPLICAZIONE
 </a>
 
@@ -68,11 +68,13 @@ Premi il pulsante per attivare lo sconto sul tuo account Amazon.
 </div>
 
 <script>
+// Raggruppiamo i link puliti e ottimizzati
+const webUrl = "https://www.amazon.it/dp/B077KBQ341/?tag=offerteita07-21";
+const androidUrl = "intent://www.amazon.it/dp/B077KBQ341/?tag=offerteita07-21#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+const iosUrl = "com.amazon.mobile.shopping://www.amazon.it/dp/B077KBQ341/?tag=offerteita07-21";
+
 function openAmazon(e) {
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const webUrl = "https://www.amazon.it/dp/B077KBQ341?&linkCode=sl2&tag=offerteita07-21&linkId=51cda0486e6c653259239bd023f99e67&ref_=as_li_ss_tl";
-    const androidUrl = "intent://www.amazon.it/dp/B077KBQ341?&linkCode=sl2&tag=offerteita07-21&linkId=51cda0486e6c653259239bd023f99e67&ref_=as_li_ss_tl/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
-    const iosUrl = "com.amazon.mobile.shopping://www.amazon.it/dp/B077KBQ341";
 
     if (/android/i.test(userAgent)) {
         e.preventDefault();
@@ -86,14 +88,15 @@ function openAmazon(e) {
 }
 
 window.onload = function() {
+    // Forza il reindirizzamento immediato solo se NON siamo dentro l'in-app browser di Facebook
     if (!navigator.userAgent.includes("FBAN") && !navigator.userAgent.includes("FBAV")) {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
         if (/android/i.test(userAgent)) {
-            window.location.href = "intent://www.amazon.it/dp/B077KBQ341?&linkCode=sl2&tag=offerteita07-21&linkId=51cda0486e6c653259239bd023f99e67&ref_=as_li_ss_tl/#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end";
+            window.location.href = androidUrl;
         } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-            window.location.href = "com.amazon.mobile.shopping://www.amazon.it/dp/B077KBQ341";
+            window.location.href = iosUrl;
         } else {
-            window.location.href = "www.amazon.it/dp/B077KBQ341?&linkCode=sl2&tag=offerteita07-21&linkId=51cda0486e6c653259239bd023f99e67&ref_=as_li_ss_tl";
+            window.location.href = webUrl; // <--- CORRETTO: Ora ha il protocollo https:// e non fallisce su PC!
         }
     }
 }
