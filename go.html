@@ -19,10 +19,12 @@
     </div>
 
     <script>
-        // Legge ASIN ed eventuale Venditore (m) dall'URL (es: go.html?asin=B0XXXXX&m=A1HO9729ND375Y)
+        // Legge ASIN, Venditore (m) e parametri Taglia/Variante (th, psc) dall'URL
         const urlParams = new URLSearchParams(window.location.search);
         const asin = urlParams.get('asin');
         const merchant = urlParams.get('m');
+        const th = urlParams.get('th');
+        const psc = urlParams.get('psc');
         const tag = "offerteita07-21";
         
         let link_nativo = "";
@@ -30,12 +32,15 @@
         let url_ios = "";
 
         if (asin) {
-            // Costruisce la query string includendo 'm' se presente
-            let param_merchant = merchant ? `&m=${merchant}` : "";
+            // Incolla tutti i parametri presenti nell'URL
+            let extra_params = "";
+            if (merchant) extra_params += `&m=${merchant}`;
+            if (th) extra_params += `&th=${th}`;
+            if (psc) extra_params += `&psc=${psc}`;
 
-            link_nativo = `https://www.amazon.it/dp/${asin}/?tag=${tag}${param_merchant}`;
-            url_android = `intent://www.amazon.it/dp/${asin}/?tag=${tag}${param_merchant}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
-            url_ios = `com.amazon.mobile.shopping://www.amazon.it/dp/${asin}/?tag=${tag}${param_merchant}`;
+            link_nativo = `https://www.amazon.it/dp/${asin}/?tag=${tag}${extra_params}`;
+            url_android = `intent://www.amazon.it/dp/${asin}/?tag=${tag}${extra_params}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
+            url_ios = `com.amazon.mobile.shopping://www.amazon.it/dp/${asin}/?tag=${tag}${extra_params}`;
         } else {
             // Fallback se l'ASIN manca
             link_nativo = `https://www.amazon.it/?tag=${tag}`; 
