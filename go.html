@@ -19,8 +19,9 @@
     </div>
 
     <script>
-        // Legge ASIN ed eventuale Venditore (m o smid) dall'URL
+        // Legge URL diretto (Modalità Tradizionale) oppure ASIN ed eventuale Venditore (m o smid)
         const urlParams = new URLSearchParams(window.location.search);
+        const directUrl = urlParams.get('url');
         const asin = urlParams.get('asin');
         const merchant = urlParams.get('m');
         const smid = urlParams.get('smid');
@@ -30,7 +31,19 @@
         let url_android = "";
         let url_ios = "";
 
-        if (asin) {
+        if (directUrl) {
+            // Modalità Tradizionale: mantiene il link esatto al 100% senza toccarlo
+            link_nativo = directUrl;
+            if (directUrl.includes("amazon.it")) {
+                const pathPulito = directUrl.replace(/^https?:\/\//, '');
+                url_android = `intent://${pathPulito}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
+                url_ios = `com.amazon.mobile.shopping://${pathPulito}`;
+            } else {
+                // Per link brevi (amzn.to) o altri store (eBay, AliExpress, ecc.) apre direttamente il link
+                url_android = directUrl;
+                url_ios = directUrl;
+            }
+        } else if (asin) {
             let extra_params = "";
             if (smid) {
                 extra_params += `&smid=${smid}`;
@@ -44,14 +57,14 @@
             url_android = `intent://www.amazon.it/dp/${asin}/?${query_finale}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
             url_ios = `com.amazon.mobile.shopping://www.amazon.it/dp/${asin}/?${query_finale}`;
         } else {
-            // Fallback se l'ASIN manca
+            // Fallback se mancano sia url che asin
             link_nativo = `https://www.amazon.it/?tag=${tag}&creatorsDisableRedirect=true&psc=1`; 
         }
 
         document.getElementById('btn-amazon').href = link_nativo;
 
         function openAmazon(e) {
-            if (!asin) return; // Se non c'è ASIN, naviga normalmente
+            if (!asin && !directUrl) return; // Se non c'è né ASIN né URL diretto, naviga normalmente
             var u = navigator.userAgent;
             if (/android/i.test(u)) {
                 e.preventDefault();
