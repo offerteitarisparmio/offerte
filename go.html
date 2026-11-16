@@ -19,12 +19,11 @@
     </div>
 
     <script>
-        // Legge ASIN, Venditore (m) e parametri Taglia/Variante (th, psc) dall'URL
+        // Legge ASIN ed eventuale Venditore (m o smid) dall'URL
         const urlParams = new URLSearchParams(window.location.search);
         const asin = urlParams.get('asin');
         const merchant = urlParams.get('m');
-        const th = urlParams.get('th');
-        const psc = urlParams.get('psc');
+        const smid = urlParams.get('smid');
         const tag = "offerteita07-21";
         
         let link_nativo = "";
@@ -32,18 +31,21 @@
         let url_ios = "";
 
         if (asin) {
-            // Incolla tutti i parametri presenti nell'URL
             let extra_params = "";
-            if (merchant) extra_params += `&m=${merchant}`;
-            if (th) extra_params += `&th=${th}`;
-            if (psc) extra_params += `&psc=${psc}`;
+            if (smid) {
+                extra_params += `&smid=${smid}`;
+            } else if (merchant) {
+                extra_params += `&m=${merchant}`;
+            }
 
-            link_nativo = `https://www.amazon.it/dp/${asin}/?tag=${tag}${extra_params}`;
-            url_android = `intent://www.amazon.it/dp/${asin}/?tag=${tag}${extra_params}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
-            url_ios = `com.amazon.mobile.shopping://www.amazon.it/dp/${asin}/?tag=${tag}${extra_params}`;
+            const query_finale = `tag=${tag}&creatorsDisableRedirect=true&psc=1${extra_params}`;
+
+            link_nativo = `https://www.amazon.it/dp/${asin}/?${query_finale}`;
+            url_android = `intent://www.amazon.it/dp/${asin}/?${query_finale}#Intent;scheme=https;package=com.amazon.mShop.android.shopping;end`;
+            url_ios = `com.amazon.mobile.shopping://www.amazon.it/dp/${asin}/?${query_finale}`;
         } else {
             // Fallback se l'ASIN manca
-            link_nativo = `https://www.amazon.it/?tag=${tag}`; 
+            link_nativo = `https://www.amazon.it/?tag=${tag}&creatorsDisableRedirect=true&psc=1`; 
         }
 
         document.getElementById('btn-amazon').href = link_nativo;
